@@ -1,0 +1,22 @@
+# Importa o módulo Twilio
+Import-Module Twilio
+
+# Defina suas credenciais do Twilio
+$accountSid = 'YOUR_ACCOUNT_SID'
+$authToken = 'YOUR_AUTH_TOKEN'
+$twilioNumber = 'YOUR_TWILIO_PHONE_NUMBER'
+$toNumber = 'RECIPIENT_PHONE_NUMBER'
+$message = 'Hello from your Twilio SMS bot!'
+
+# Crie um cliente Twilio
+$client = New-TwilioRestClient -AccountSid $accountSid -AuthToken $authToken
+
+# Envie a mensagem SMS
+$response = $client.Messages.Create(
+    -From $twilioNumber,
+    -To $toNumber,
+    -Body $message
+)
+
+# Exiba a resposta
+$response | Format-List
